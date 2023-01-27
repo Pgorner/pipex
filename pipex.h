@@ -6,7 +6,7 @@
 /*   By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:29:25 by pgorner           #+#    #+#             */
-/*   Updated: 2023/01/20 16:30:42 by pgorner          ###   ########.fr       */
+/*   Updated: 2023/01/27 15:50:07 by pgorner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@
 
 typedef struct vs
 {
-//	int		num;
 	int		input;
 	int		output;
 	int		pfeife[2];
+	int		shisha[2];
 	char	**one;
 	char	**two;
+	char	*cmdone;
+	char	*cmdtwo;
 	char	*pone;
 	char	*ptwo;
 	char	*arg;
 	char	**env;
-//	char	**path;
-} t_s;
-
-
+	char	**env2;
+}	t_s;
 
 //==============================================================================
 //---------------------------------EXIT-CODES-----------------------------------
@@ -73,6 +73,7 @@ typedef struct vs
 //==============================================================================
 //	starts the whole program
 int		main(int argc, char *argv[], char *env[]);
-void	parent(t_s *vs);
-void	child(t_s *vs);
+void	child(t_s *vs, char *argv[]);
+void	parent(t_s *vs, char *argv[]);
+void	ft_exit(char *c, int exc);
 #endif

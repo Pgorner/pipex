@@ -9,7 +9,7 @@
 NAME = pipex
 
 CC		 = cc
-CFLAGS   = -Wall -Werror -Wextra
+#CFLAGS   = -Wall -Werror -Wextra
 AR		 = ar rcs
 RM		 = rm -rf
 FSANITIZE = -fsanitize=address -g
@@ -29,7 +29,8 @@ OBJS =		$(SRC:.c=.o)
 LIBFT =	./libft/libft.a
 
 $(NAME):	$(LIBFT) $(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+			$(CC) $(OBJS) $(LIBFT) -o $(NAME)
+# $(CFLAGS)
 
 $(LIBFT):
 			@if [ ! -d "libft" ]; then git clone https://github.com/Pgorner/libft.git; fi

@@ -6,26 +6,36 @@
 /*   By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:44:45 by pgorner           #+#    #+#             */
-/*   Updated: 2023/01/20 16:31:15 by pgorner          ###   ########.fr       */
+/*   Updated: 2023/01/27 15:59:34 by pgorner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child(t_s *vs)
+void	child(t_s *vs, char *argv[])
 {
-	dup2(vs->input, STDIN);
-	dup2(vs->pfeife[WRITE], STDOUT);
-	close(vs->pfeife[READ]);
-	close(vs->input);
-	execve(vs->pone, vs->one, vs->env);
+	if (vs->pone != NULL)
+	{
+		dup2(vs->input, STDIN);
+		close(vs->input);
+		dup2(vs->pfeife[WRITE], STDOUT);
+		close(vs->pfeife[READ]);
+		if (access(vs->pone, F_OK) == 0)
+			if (execve(vs->pone, vs->one, vs->env2) < 0)
+				exit(0);
+	}
 }
 
-void	parent(t_s *vs)
+void	parent(t_s *vs, char *argv[])
 {
-	dup2(vs->output, STDOUT);
-	dup2(vs->pfeife[READ], STDIN);
-	close(vs->pfeife[WRITE]);
-	close(vs->output);
-	execve(vs->ptwo, vs->two, vs->env);
+	if (vs->ptwo != NULL)
+	{
+		dup2(vs->output, STDOUT);
+		close(vs->output);
+		dup2(vs->pfeife[READ], STDIN);
+		close(vs->pfeife[WRITE]);
+		if (access(vs->ptwo, F_OK) == 0)
+			if (execve(vs->ptwo, vs->two, vs->env2) < 0)
+				exit(0);
+	}
 }
