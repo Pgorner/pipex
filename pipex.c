@@ -6,7 +6,7 @@
 /*   By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 13:15:45 by pgorner           #+#    #+#             */
-/*   Updated: 2023/01/27 16:00:28 by pgorner          ###   ########.fr       */
+/*   Updated: 2023/02/23 15:46:43 by pgorner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	free_leaks(t_s *vs)
 	while (vs->env[i])
 		free(vs->env[i++]);
 	free(vs->env);
+	free(vs->one);
+	free(vs->two);
 	free(vs);
 }
 
@@ -91,6 +93,7 @@ void	set_vs(int argc, char *argv[], char *env[], t_s *vs)
 	vs->two = ft_split(argv[3], ' ');
 	vs->input = open(argv[1], O_RDONLY);
 	vs->output = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+
 	if (vs->output < 0 || vs->input < 0)
 		ft_exit("Failed to open input/output file", 1);
 }
@@ -109,11 +112,12 @@ int	main(int argc, char *argv[], char *env[])
 		exit(0);
 	gabel = fork();
 	if (gabel == 0)
-		child(&vs, argv);
+		child(&vs);
 	else
-		parent(&vs, argv);
+		parent(&vs);
 	if (access(vs.pone, F_OK) == 0)
-		parent(&vs, argv);
+		parent(&vs);
+	free_leaks(&vs);
+	exit(0);
 	return (0);
 }
-	/* free_leaks(&vs); */

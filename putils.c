@@ -6,13 +6,13 @@
 /*   By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:44:45 by pgorner           #+#    #+#             */
-/*   Updated: 2023/01/27 15:59:34 by pgorner          ###   ########.fr       */
+/*   Updated: 2023/02/23 13:19:40 by pgorner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child(t_s *vs, char *argv[])
+void	child(t_s *vs)
 {
 	if (vs->pone != NULL)
 	{
@@ -26,7 +26,7 @@ void	child(t_s *vs, char *argv[])
 	}
 }
 
-void	parent(t_s *vs, char *argv[])
+void	parent(t_s *vs)
 {
 	if (vs->ptwo != NULL)
 	{

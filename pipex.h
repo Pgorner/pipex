@@ -6,7 +6,7 @@
 /*   By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:29:25 by pgorner           #+#    #+#             */
-/*   Updated: 2023/01/27 15:50:07 by pgorner          ###   ########.fr       */
+/*   Updated: 2023/02/23 13:19:48 by pgorner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct vs
 //==============================================================================
 //	starts the whole program
 int		main(int argc, char *argv[], char *env[]);
-void	child(t_s *vs, char *argv[]);
-void	parent(t_s *vs, char *argv[]);
+void	child(t_s *vs);
+void	parent(t_s *vs);
 void	ft_exit(char *c, int exc);
 #endif
